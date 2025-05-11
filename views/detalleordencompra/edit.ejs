@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Detalle de Orden de Compra</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css"><!-- Opcional -->
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 40px;
+            max-width: 600px;
+        }
+        h1 {
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: 500;
+        }
+        .btn-custom {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container bg-white p-4 rounded shadow">
+        <h1 class="text-center">Editar Detalle de Orden de Compra</h1>
+
+        <form action="/detalleordencompras/edit/<%= detalle.NroOrdenC %>/<%= detalle.CodMedicamento %>" method="POST">
+            <div class="mb-3">
+                <label for="NroOrdenC" class="form-label">Orden de Compra:</label>
+                <select name="NroOrdenC" id="NroOrdenC" class="form-select" disabled>
+                    <% ordenes.forEach(orden => { %>
+                        <option value="<%= orden.NroOrdenC %>" <%= orden.NroOrdenC === detalle.NroOrdenC ? 'selected' : '' %>>
+                            <%= orden.NroOrdenC %> - <%= orden.fecha %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="CodMedicamento" class="form-label">Medicamento:</label>
+                <select name="CodMedicamento" id="CodMedicamento" class="form-select" disabled>
+                    <% medicamentos.forEach(med => { %>
+                        <option value="<%= med.CodMedicamento %>" <%= med.CodMedicamento === detalle.CodMedicamento ? 'selected' : '' %>>
+                            <%= med.nombre %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <input type="text" name="descripcion" id="descripcion" value="<%= detalle.descripcion %>" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="cantidad" class="form-label">Cantidad:</label>
+                <input type="number" name="cantidad" id="cantidad" value="<%= detalle.cantidad %>" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="precio" class="form-label">Precio:</label>
+                <input type="number" step="0.01" name="precio" id="precio" value="<%= detalle.precio %>" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="montouni" class="form-label">Monto Unitario:</label>
+                <input type="number" step="0.01" name="montouni" id="montouni" value="<%= detalle.montouni %>" class="form-control" required>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary btn-custom">Actualizar</button>
+                <a href="/detalleordencompras" class="btn btn-secondary btn-custom">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

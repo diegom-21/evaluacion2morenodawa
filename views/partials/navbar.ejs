@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="/">Farmacia</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Inicio</a>
+        </li>
+        <% if (user) { %>
+          <% if (user.rol === 'admin') { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin">Panel de Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/medicamentos">Tablas Medicamentos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/laboratorios">Tablas Laboratorios</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/ordencompras">Tablas Orden de Compras</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/detalleordencompras">Tabla Detalle Orden Compra</a>
+            </li>
+          <% } else if (user.rol === 'moderator') { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/moderator">Panel de Moderador</a>
+            </li>
+          <% } %>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/logout">Cerrar Sesión</a>
+          </li>
+        <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/login">Iniciar Sesión</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/register">Registrarse</a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>

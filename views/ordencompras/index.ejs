@@ -1,0 +1,69 @@
+<!-- views/ordencompras/index.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Órdenes de Compra</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+      body {
+          font-family: 'Outfit', sans-serif;
+          background-color: #f8f9fa;
+      }
+      .container {
+          margin-top: 40px;
+      }
+      h1 {
+          font-weight: 600;
+          margin-bottom: 30px;
+      }
+      table th {
+          background-color: #0d6efd;
+          color: white;
+      }
+      .btn-custom {
+          font-weight: 500;
+      }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>Órdenes de Compra</h1>
+    <a href="/ordencompras/create" class="btn btn-primary mb-3">Crear Nueva Orden</a>
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Número de Orden</th>
+          <th>Fecha de Emisión</th>
+          <th>Situacion</th>
+          <th>Total</th>
+          <th>Codigo de Laboratorio</th>
+          <th>Numero de Factura</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% ordenes.forEach(orden => { %>
+          <tr>
+            <td><%= orden.NroOrdenC %></td>
+            <td><%= orden.fechaEmision %></td>
+            <td><%= orden.Situacion %></td>
+            <td><%= orden.Total %></td>
+            <td><%= orden.CodLab %></td>
+            <td><%= orden.NrofacturaProv %></td>
+            <td>
+              <a href="/ordencompras/<%= orden.NroOrdenC %>" class="btn btn-info btn-sm">Ver</a>
+              <a href="/ordencompras/edit/<%= orden.NroOrdenC %>" class="btn btn-warning btn-sm">Editar</a>
+              <form action="/ordencompras/delete/<%= orden.NroOrdenC %>" method="POST" style="display: inline;">
+                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
